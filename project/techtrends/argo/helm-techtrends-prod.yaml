@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/pipomadrid/TechTrends.git'
     targetRevision: main
-    path: techtrends/helm
+    path: helm
     helm:
       valueFiles:
         - values-prod.yaml

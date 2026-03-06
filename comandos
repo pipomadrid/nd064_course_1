@@ -1,3 +1,38 @@
 curl -sfL https://get.k3s.io | sh -
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
+kubectl logs -n argocd -l app.kubernetes.io/name=argocd-applicationset-controller --previous
+kubectl rollout restart deployment argocd-repo-server -n argocd
+kubectl get svc -n argocd argocd-repo-server
+kubectl get pod -n argocd -l app.kubernetes.io/name=argocd-repo-server -o yaml | grep -A 5 "lastState"
+kubectl rollout restart deployment argocd-applicationset-controller -n argocd
+kubectl exec -it -n argocd -l app.kubernetes.io/name=argocd-repo-server -- git ls-remote https://github.com/pipomadrid/TechTrends.git
+kubectl delete application techtrends-staging -n argocd
+kubectl logs -n argocd -l app.kubernetes.io/name=argocd-repo-server -f
+
+
+epo-server -f
+Defaulted container "argocd-repo-server" out of: argocd-repo-server, copyutil (init)
+{"dir":"/tmp/_argocd-repo/de6a39af-2df9-430a-886f-7d03ad6ff4f6","execID":"c99f9","level":"info","msg":"git checkout --force ad1cb5fe67376f281afffe7f1f996845ee47acc6","time":"2026-03-06T10:21:21Z"}
+{"args":"[git checkout --force ad1cb5fe67376f281afffe7f1f996845ee47acc6]","dir":"/tmp/_argocd-repo/de6a39af-2df9-430a-886f-7d03ad6ff4f6","level":"info","msg":"Trace","operation_name":"exec git","time":"2026-03-06T10:21:21Z","time_ms":18.338644000000002}
+{"dir":"/tmp/_argocd-repo/de6a39af-2df9-430a-886f-7d03ad6ff4f6","execID":"16e39","level":"info","msg":"git clean -ffdx","time":"2026-03-06T10:21:21Z"}
+{"args":"[git clean -ffdx]","dir":"/tmp/_argocd-repo/de6a39af-2df9-430a-886f-7d03ad6ff4f6","level":"info","msg":"Trace","operation_name":"exec git","time":"2026-03-06T10:21:21Z","time_ms":12.277258}
+{"file":"venv/bin/python3","level":"warning","msg":"repository contains out-of-bounds symlink","repo":"https://github.com/pipomadrid/TechTrends.git","revision":"ad1cb5fe67376f281afffe7f1f996845ee47acc6","security":3,"time":"2026-03-06T10:21:21Z"}
+{"grpc.code":"Unknown","grpc.component":"server","grpc.error":"repository contains out-of-bounds symlinks. file: venv/bin/python3","grpc.method":"GenerateManifest","grpc.method_type":"unary","grpc.request.deadline":"2026-03-06T10:22:20Z","grpc.service":"repository.RepoServerService","grpc.start_time":"2026-03-06T10:21:20Z","grpc.time_ms":"203.297","level":"error","msg":"finished call","peer.address":"10.42.0.62:45066","protocol":"grpc","time":"2026-03-06T10:21:21Z"}
+{"grpc.component":"server","grpc.method":"GetRevisionMetadata","grpc.method_type":"unary","grpc.request.deadline":"2026-03-06T10:22:31Z","grpc.service":"repository.RepoServerService","grpc.start_time":"2026-03-06T10:21:32Z","grpc.time_ms":"0.066","level":"info","msg":"started call","peer.address":"10.42.0.74:43576","protocol":"grpc","time":"2026-03-06T10:21:32Z"}
+{"grpc.code":"Unknown","grpc.component":"server","grpc.error":"revision main must be resolved","grpc.method":"GetRevisionMetadata","grpc.method_type":"unary","grpc.request.deadline":"2026-03-06T10:22:31Z","grpc.service":"repository.RepoServerService","grpc.start_time":"2026-03-06T10:21:32Z","grpc.time_ms":"0.381","level":"error","msg":"finished call","peer.address":"10.42.0.74:43576","protocol":"grpc","time":"2026-03-06T10:21:32Z"}
+{"grpc.component":"server","grpc.method":"Check","grpc.method_type":"unary","grpc.request.deadline":"2026-03-06T10:22:44Z","grpc.service":"grpc.health.v1.Health","grpc.start_time":"2026-03-06T10:21:44Z","grpc.time_ms":"0.068","level":"info","msg":"started call","peer.address":"127.0.0.1:58682","protocol":"grpc","time":"2026-03-06T10:21:44Z"}
+{"grpc.code":"OK","grpc.component":"server","grpc.method":"Check","grpc.method_type":"unary","grpc.request.deadline":"2026-03-06T10:22:44Z","grpc.service":"grpc.health.v1.Health","grpc.start_time":"2026-03-06T10:21:44Z","grpc.time_ms":"0.54","level":"info","msg":"finished call","peer.address":"127.0.0.1:58682","protocol":"grpc","time":"2026-03-06T10:21:44Z"}
+{"grpc.component":"server","grpc.method":"Check","grpc.method_type":"unary","grpc.request.deadline":"2026-03-06T10:23:14Z","grpc.service":"grpc.health.v1.Health","grpc.start_time":"2026-03-06T10:22:14Z","grpc.time_ms":"0.058","level":"info","msg":"started call","peer.address":"127.0.0.1:58862","protocol":"grpc","time":"2026-03-06T10:22:14Z"}
+{"grpc.code":"OK","grpc.component":"server","grpc.method":"Check","grpc.method_type":"unary","grpc.request.deadline":"2026-03-06T10:23:14Z","grpc.service":"grpc.health.v1.Health","grpc.start_time":"2026-03-06T10:22:14Z","grpc.time_ms":"0.412","level":"info","msg":"finished call","peer.address":"127.0.0.1:58862","protocol":"grpc","time":"2026-03-06T10:22:14Z"}
+{"grpc.component":"server","grpc.method":"GenerateManifest","grpc.method_type":"unary","grpc.request.deadline":"2026-03-06T10:23:22Z","grpc.service":"repository.RepoServerService","grpc.start_time":"2026-03-06T10:22:22Z","grpc.time_ms":"0.562","level":"info","msg":"started call","peer.address":"10.42.0.62:45442","protocol":"grpc","time":"2026-03-06T10:22:22Z"}
+{"level":"info","msg":"manifest cache miss: \u0026ApplicationSource{RepoURL:https://github.com/pipomadrid/TechTrends.git,Path:helm,TargetRevision:main,Helm:\u0026ApplicationSourceHelm{ValueFiles:[values-prod.yaml],Parameters:[]HelmParameter{},ReleaseName:,Values:,FileParameters:[]HelmFileParameter{},Version:,PassCredentials:false,IgnoreMissingValueFiles:false,SkipCrds:false,ValuesObject:nil,Namespace:,KubeVersion:,APIVersions:[],SkipTests:false,SkipSchemaValidation:false,},Kustomize:nil,Directory:nil,Plugin:nil,Chart:,Ref:,Name:,}/ad1cb5fe67376f281afffe7f1f996845ee47acc6","time":"2026-03-06T10:22:22Z"}
+{"dir":"/tmp/_argocd-repo/de6a39af-2df9-430a-886f-7d03ad6ff4f6","execID":"93982","level":"info","msg":"git cat-file -t ad1cb5fe67376f281afffe7f1f996845ee47acc6","time":"2026-03-06T10:22:22Z"}
+{"args":"[git cat-file -t ad1cb5fe67376f281afffe7f1f996845ee47acc6]","dir":"/tmp/_argocd-repo/de6a39af-2df9-430a-886f-7d03ad6ff4f6","level":"info","msg":"Trace","operation_name":"exec git","time":"2026-03-06T10:22:22Z","time_ms":15.006096999999999}
+{"dir":"/tmp/_argocd-repo/de6a39af-2df9-430a-886f-7d03ad6ff4f6","execID":"e4b87","level":"info","msg":"git checkout --force ad1cb5fe67376f281afffe7f1f996845ee47acc6","time":"2026-03-06T10:22:22Z"}
+{"args":"[git checkout --force ad1cb5fe67376f281afffe7f1f996845ee47acc6]","dir":"/tmp/_argocd-repo/de6a39af-2df9-430a-886f-7d03ad6ff4f6","level":"info","msg":"Trace","operation_name":"exec git","time":"2026-03-06T10:22:22Z","time_ms":20.852371}
+{"dir":"/tmp/_argocd-repo/de6a39af-2df9-430a-886f-7d03ad6ff4f6","execID":"610a5","level":"info","msg":"git clean -ffdx","time":"2026-03-06T10:22:22Z"}
+{"args":"[git clean -ffdx]","dir":"/tmp/_argocd-repo/de6a39af-2df9-430a-886f-7d03ad6ff4f6","level":"info","msg":"Trace","operation_name":"exec git","time":"2026-03-06T10:22:22Z","time_ms":14.871723}
+{"file":"venv/bin/python3","level":"warning","msg":"repository contains out-of-bounds symlink","repo":"https://github.com/pipomadrid/TechTrends.git","revision":"ad1cb5fe67376f281afffe7f1f996845ee47acc6","security":3,"time":"2026-03-06T10:22:22Z"}
+{"grpc.code":"Unknown","grpc.component":"server","grpc.error":"repository contains out-of-bounds symlinks. file: venv/bin/python3","grpc.method":"GenerateManifest","grpc.method_type":"unary","grpc.request.deadline":"2026-03-06T10:23:22Z","grpc.service":"repository.RepoServerService","grpc.start_time":"2026-03-06T10:22:22Z","grpc.time_ms":"63.898","level":"error","msg":"finished call","peer.address":"10.42.0.62:45442","protocol":"grpc","time":"2026-03-06T10:22:22Z"}
