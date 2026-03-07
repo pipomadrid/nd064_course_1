@@ -11,10 +11,13 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
 )
 
+db_connection_count = 0
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
 def get_db_connection():
+    global db_connection_count
+    db_connection_count += 1
     connection = sqlite3.connect('database.db')
     connection.row_factory = sqlite3.Row
     return connection
@@ -88,8 +91,13 @@ def status():
 
 @app.route("/metrics")
 def metrics():
+    connection = get_db_connection()
+    post_count_query = connection.execute('SELECT count(*) FROM posts').fetchone()
+    connection.close()
+    post_count = post_count_query[0]
+
   response = app.response_class(
-          response=json.dumps({"status":"success","code":0,"data":{"db_connection_count": 1, "post_count": 7}}),
+          response=json.dumps({"status":"success","code":0,"data":{"db_connection_count": db_connection_count, "post_count": post_count}}),
           status=200,
           mimetype='application/json'
   )
