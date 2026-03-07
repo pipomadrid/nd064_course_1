@@ -8,29 +8,45 @@
 # docker logs 4cf3fc2736b4
 
 ## Logs from the container running the TechTrends application
-
-* Environment: production
+techtrends$ docker logs -f 63270139372f
+ * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
    Use a production WSGI server instead.
  * Debug mode: off
-2026-03-05 11:41:08,433 [WARNING]  * Running on all addresses.
+2026-03-07 08:30:53,089 [WARNING]  * Running on all addresses.
    WARNING: This is a development server. Do not use it in a production deployment.
-2026-03-05 11:41:08,433 [INFO]  * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
-2026-03-05 11:41:23,146 [INFO] About Us page retrieved
-2026-03-05 11:41:23,160 [INFO] 172.17.0.1 - - [05/Mar/2026 11:41:23] "GET /about HTTP/1.1" 200 -
-2026-03-05 11:41:23,177 [INFO] 172.17.0.1 - - [05/Mar/2026 11:41:23] "GET /static/css/main.css HTTP/1.1" 304 -
-2026-03-05 11:42:32,981 [INFO] 172.17.0.1 - - [05/Mar/2026 11:42:32] "GET /create HTTP/1.1" 200 -
-2026-03-05 11:42:32,998 [INFO] 172.17.0.1 - - [05/Mar/2026 11:42:32] "GET /static/css/main.css HTTP/1.1" 304 -
-2026-03-05 11:42:53,126 [INFO] Article test3 created succesfully
-2026-03-05 11:42:53,127 [INFO] 172.17.0.1 - - [05/Mar/2026 11:42:53] "POST /create HTTP/1.1" 302 -
-2026-03-05 11:42:53,133 [INFO] 172.17.0.1 - - [05/Mar/2026 11:42:53] "GET / HTTP/1.1" 200 -
-2026-03-05 11:42:53,150 [INFO] 172.17.0.1 - - [05/Mar/2026 11:42:53] "GET /static/css/main.css HTTP/1.1" 304 -
-2026-03-05 11:42:58,168 [INFO] Article "test3" retrieved successfully
-2026-03-05 11:42:58,171 [INFO] 172.17.0.1 - - [05/Mar/2026 11:42:58] "GET /7 HTTP/1.1" 200 -
-2026-03-05 11:42:58,188 [INFO] 172.17.0.1 - - [05/Mar/2026 11:42:58] "GET /static/css/main.css HTTP/1.1" 304 -
-2026-03-05 11:43:03,844 [INFO] Article with id 500 doesn't exist
-2026-03-05 11:43:03,846 [INFO] 172.17.0.1 - - [05/Mar/2026 11:43:03] "GET /500 HTTP/1.1" 404 -
-2026-03-05 11:43:03,859 [INFO] 172.17.0.1 - - [05/Mar/2026 11:43:03] "GET /static/css/main.css HTTP/1.1" 304 -
+2026-03-07 08:30:53,089 [INFO]  * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
+2026-03-07 08:34:37,021 [INFO] 172.17.0.1 - - [07/Mar/2026 08:34:37] "GET / HTTP/1.1" 200 -
+2026-03-07 08:34:37,042 [INFO] 172.17.0.1 - - [07/Mar/2026 08:34:37] "GET /static/css/main.css HTTP/1.1" 200 -
+2026-03-07 08:34:37,044 [INFO] 172.17.0.1 - - [07/Mar/2026 08:34:37] "GET /favicon.ico HTTP/1.1" 404 -
+2026-03-07 08:34:52,125 [INFO] 172.17.0.1 - - [07/Mar/2026 08:34:52] "GET /healthz HTTP/1.1" 200 -
+2026-03-07 08:34:52,290 [INFO] 172.17.0.1 - - [07/Mar/2026 08:34:52] "GET /favicon.ico HTTP/1.1" 404 -
+2026-03-07 08:35:00,150 [INFO] 172.17.0.1 - - [07/Mar/2026 08:35:00] "GET /metrics HTTP/1.1" 200 -
+2026-03-07 08:35:00,170 [INFO] 172.17.0.1 - - [07/Mar/2026 08:35:00] "GET /favicon.ico HTTP/1.1" 404 -
+2026-03-07 08:36:25,508 [INFO] 172.17.0.1 - - [07/Mar/2026 08:36:25] "GET / HTTP/1.1" 200 -
+2026-03-07 08:36:25,536 [INFO] 172.17.0.1 - - [07/Mar/2026 08:36:25] "GET /static/css/main.css HTTP/1.1" 304 -
+2026-03-07 08:36:27,891 [INFO] 172.17.0.1 - - [07/Mar/2026 08:36:27] "GET /metrics HTTP/1.1" 200 -
+2026-03-07 08:36:27,908 [INFO] 172.17.0.1 - - [07/Mar/2026 08:36:27] "GET /favicon.ico HTTP/1.1" 404 -
+2026-03-07 08:37:27,076 [INFO] 172.17.0.1 - - [07/Mar/2026 08:37:27] "GET / HTTP/1.1" 200 -
+2026-03-07 08:37:27,087 [INFO] 172.17.0.1 - - [07/Mar/2026 08:37:27] "GET /static/css/main.css HTTP/1.1" 200 -
+2026-03-07 08:40:30,375 [INFO] Article "2020 CNCF Annual Report" retrieved successfully
+2026-03-07 08:40:30,377 [INFO] 172.17.0.1 - - [07/Mar/2026 08:40:30] "GET /1 HTTP/1.1" 200 -
+2026-03-07 08:40:30,394 [INFO] 172.17.0.1 - - [07/Mar/2026 08:40:30] "GET /static/css/main.css HTTP/1.1" 304 -
+2026-03-07 08:40:42,232 [ERROR] Article with id 100 doesn't exist
+2026-03-07 08:40:42,234 [INFO] 172.17.0.1 - - [07/Mar/2026 08:40:42] "GET /100 HTTP/1.1" 404 -
+2026-03-07 08:40:42,254 [INFO] 172.17.0.1 - - [07/Mar/2026 08:40:42] "GET /static/css/main.css HTTP/1.1" 304 -
+2026-03-07 08:40:47,660 [INFO] About Us page retrieved
+2026-03-07 08:40:47,662 [INFO] 172.17.0.1 - - [07/Mar/2026 08:40:47] "GET /about HTTP/1.1" 200 -
+2026-03-07 08:40:47,683 [INFO] 172.17.0.1 - - [07/Mar/2026 08:40:47] "GET /static/css/main.css HTTP/1.1" 304 -
+2026-03-07 08:40:59,138 [INFO] 172.17.0.1 - - [07/Mar/2026 08:40:59] "GET / HTTP/1.1" 200 -
+2026-03-07 08:40:59,156 [INFO] 172.17.0.1 - - [07/Mar/2026 08:40:59] "GET /static/css/main.css HTTP/1.1" 304 -
+2026-03-07 08:41:07,294 [INFO] 172.17.0.1 - - [07/Mar/2026 08:41:07] "GET /create HTTP/1.1" 200 -
+2026-03-07 08:41:07,321 [INFO] 172.17.0.1 - - [07/Mar/2026 08:41:07] "GET /static/css/main.css HTTP/1.1" 304 -
+2026-03-07 08:41:16,062 [INFO] Article Test created succesfully
+2026-03-07 08:41:16,062 [INFO] 172.17.0.1 - - [07/Mar/2026 08:41:16] "POST /create HTTP/1.1" 302 -
+2026-03-07 08:41:16,067 [INFO] 172.17.0.1 - - [07/Mar/2026 08:41:16] "GET / HTTP/1.1" 200 -
+2026-03-07 08:41:16,086 [INFO] 172.17.0.1 - - [07/Mar/2026 08:41:16] "GET /static/css/main.css HTTP/1.1" 304 -
+
 
 
 

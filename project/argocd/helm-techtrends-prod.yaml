@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/pipomadrid/TechTrends.git'
+    repoURL: 'https://github.com/pipomadrid/nd064_course_1.git'
     targetRevision: main
-    path: helm
+    path: project/helm
     helm:
       valueFiles:
         - values-prod.yaml
