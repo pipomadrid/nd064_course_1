@@ -25,6 +25,7 @@ resources:
 
 livenessProbe:
   path: /healthz
+  initialDelaySeconds: 15
   port: 3111
 
 readinessProbe:
