@@ -1,14 +1,21 @@
 import sqlite3
 import logging
+import sys
 
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
+stdout_handler = logging.StreamHandler(sys.stdout)
+stdout_handler.setLevel(logging.DEBUG)
+stdout_handler.addFilter(lambda record: record.levelno < logging.ERROR)
 
+stderr_handler = logging.StreamHandler(sys.stderr)
+stderr_handler.setLevel(logging.ERROR)
 
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[stdout_handler, stderr_handler]
 )
 
 db_connection_count = 0
@@ -48,7 +55,7 @@ def index():
 def post(post_id):
     post = get_post(post_id)
     if post is None:
-      app.logger.info("Article with id %s doesn't exist", post_id)
+      app.logger.error("Article with id %s doesn't exist", post_id)
       return render_template('404.html'), 404
     else:
       app.logger.info('Article "%s" retrieved successfully', post['title'])
@@ -96,7 +103,7 @@ def metrics():
     connection.close()
     post_count = post_count_query[0]
 
-  response = app.response_class(
+    response = app.response_class(
           response=json.dumps({"status":"success","code":0,"data":{"db_connection_count": db_connection_count, "post_count": post_count}}),
           status=200,
           mimetype='application/json'
