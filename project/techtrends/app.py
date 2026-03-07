@@ -93,8 +93,8 @@ def status():
           response=json.dumps({"result":"OK - healthy"}),
           status=200,
           mimetype='application/json'
-  )
-  return response
+    )
+    return response
 
 @app.route("/metrics")
 def metrics():
@@ -108,7 +108,7 @@ def metrics():
           status=200,
           mimetype='application/json'
     )
-  return response
+    return response
 
 # start the application on port 3111
 if __name__ == "__main__":
