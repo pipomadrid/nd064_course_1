@@ -89,7 +89,7 @@ def create():
 
 @app.route("/healthz")
 def status():
-  response = app.response_class(
+    response = app.response_class(
           response=json.dumps({"result":"OK - healthy"}),
           status=200,
           mimetype='application/json'
@@ -107,7 +107,7 @@ def metrics():
           response=json.dumps({"status":"success","code":0,"data":{"db_connection_count": db_connection_count, "post_count": post_count}}),
           status=200,
           mimetype='application/json'
-  )
+    )
   return response
 
 # start the application on port 3111
