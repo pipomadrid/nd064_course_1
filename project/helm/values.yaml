@@ -3,7 +3,7 @@ namespace: sandbox
 replicaCount: 1
 
 image:
-  repository: pedrosaez/techtrends/
+  repository: pedrosaez/techtrends
   tag: latest
   pullPolicy: IfNotPresent
 
